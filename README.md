@@ -20,8 +20,8 @@
 - Поддержка разнообразных знаков (ограничения скорости, запреты, предупреждения).
 
 ### 2. Датасет и классы
-
-[Датасет](https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign)
+[Датасет по детекции](https://www.kaggle.com/datasets/watchman/rtsd-dataset)
+[Датасет по классиификации](https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign)
 - Задача классификации одного изображения по нескольким классам
 - Более 40 классов
 - Всего более 50 000 изображений
