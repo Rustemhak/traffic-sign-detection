@@ -22,6 +22,7 @@
 ### 2. Датасет и классы
 * [Датасет по детекции](https://www.kaggle.com/datasets/watchman/rtsd-dataset)
 * [Датасет по классиификации](https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign)
+* [Датасеты в Roboflow](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main/road.ipynb)
   - Задача классификации одного изображения по нескольким классам
   - Более 40 классов
   - Всего более 50 000 изображений
@@ -35,10 +36,13 @@
 - Время обработки кадра (для оценки способности работать в реальном времени).
 
 **Архитектуры:**
-- CNN (Convolutional Neural Networks) для извлечения признаков изображений.
-- Возможное использование архитектур, предобученных на больших датасетах (например, ResNet, MobileNet).
-- Трансформеры
+- [yolo-8-nano](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main/road.ipynb)
+- rtdetr
 - Рассмотрение подходов сегментации, если требуется точное выделение знаков на изображении.
+**Эксперименты**
+  - ClearML
+**Версионирование датасетов**
+  - Roboflow
 
 ### 4. Архитектура решения
 ![Архитектура решения](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main/architecture.jpg)
