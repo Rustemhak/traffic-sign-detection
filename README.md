@@ -22,7 +22,7 @@
 ### 2. Датасет и классы
 * [Датасет по детекции](https://www.kaggle.com/datasets/watchman/rtsd-dataset)
 * [Датасет по классиификации](https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign)
-* [Датасеты в Roboflow](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main/road.ipynb)
+* [Датасеты в Roboflow](https://universe.roboflow.com/ilya-stmnk/road-mnsrr)
   - Задача классификации одного изображения по нескольким классам
   - Более 40 классов
   - Всего более 50 000 изображений
