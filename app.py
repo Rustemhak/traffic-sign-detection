@@ -49,6 +49,14 @@ def process_video(video_path, model):
 
     cap.release()
 
+# Функция для скачивания видео с YouTube
+def download_youtube_video(url):
+    yt = YouTube(url)
+    stream = yt.streams.filter(file_extension='mp4').first()
+    temp_dir = tempfile.mkdtemp()
+    video_path = stream.download(output_path=temp_dir)
+    return video_path
+
 # ... (остальная часть кода)
 
 
