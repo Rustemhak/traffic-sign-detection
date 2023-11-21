@@ -4,31 +4,38 @@ from pytube import YouTube
 import cv2
 import tempfile
 import os
-from ultralytics import RTDETR
-import numpy as np
-
+from ultralytics import YOLO
 
 # Загрузка модели Ultralytics
-model = RTDETR('best.pt')  # убедитесь, что файл best.pt находится в правильной директории
+model = YOLO('best_yolo.pt')  # убедитесь, что файл best_yolo.pt находится в правильной директории
 
+def draw_boxes(frame, detections):
+    for det in detections:
+        if len(det) >= 6:
+            x1, y1, x2, y2, conf, cls = det
+            if conf > 0.25:  # Установите порог уверенности
 
-def draw_boxes(frame, results):
-    # Проверка, не пусты ли результаты
-    if len(results) == 0:
-        return frame  # Возвращение неизмененного кадра, если результаты пусты
+                # Корректировка координат рамки
+                x1, y1, x2, y2 = max(0, int(x1)), max(0, int(y1)), min(int(x2), frame.shape[1]), min(int(y2), frame.shape[0])
 
-    for det in results:
-        # Возможно, потребуется адаптировать эту логику в соответствии с форматом данных
-        if len(det) >= 5 and det[4] > conf_thres:  # Проверка наличия нужных данных
-            x1, y1, x2, y2, conf, cls =det[:6]
-            cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0),
-                          2)  # Рисование ограничивающей рамки
-            cv2.putText(frame, f'{cls} {conf:.2f}', (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0),
-                        2)  # Добав
+                # Получение названия класса
+                label = f'{model.names[int(cls)]} {conf:.2f}'
+
+                # Установка толщины рамки и размера шрифта
+                box_thickness = 3
+                font_scale = 0.7
+                font_thickness = 2
+
+                # Рисование ограничивающей рамки
+                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), box_thickness)
+
+                # Рисование подписи
+                cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), font_thickness)
 
     return frame
 
-# Функция для обработки видео
+
+
 def process_video(video_path, model):
     cap = cv2.VideoCapture(video_path)
     stframe = st.empty()
@@ -40,14 +47,19 @@ def process_video(video_path, model):
 
         # Обработка кадра с помощью модели
         results = model(frame)
+        detections = results if isinstance(results, list) else results.xyxy[0]
 
         # Рендеринг ограничивающих рамок и классов на кадре
-        frame = draw_boxes(frame, results)
+        frame = draw_boxes(frame, detections)
 
         # Отображение обработанного кадра
         stframe.image(frame, channels="BGR", use_column_width=True)
 
     cap.release()
+
+# ... (остальная часть кода)
+
+
 
 # Функция для скачивания видео с YouTube
 def download_youtube_video(url):
