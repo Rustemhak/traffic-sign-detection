@@ -1,0 +1,2 @@
+metrics/precision(B),metrics/recall(B),metrics/mAP50(B),metrics/mAP50-95(B),fitness,model/parameters,model/GFLOPs,model/speed_PyTorch(ms)
+0.7659389721390142,0.8842764516497573,0.8646809242901753,0.5671453640461964,0.5968989200705943,32841011,0,16.017
