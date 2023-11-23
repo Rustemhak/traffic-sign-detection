@@ -37,7 +37,7 @@
 
 **Архитектуры:**
 - [yolo-8-nano](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main/road.ipynb)
-- rtdetr]
+-  [RT-DETR](https://docs.ultralytics.com/models/rtdetr/)
 - Рассмотрение подходов сегментации, если требуется точное выделение знаков на изображении.
 **Эксперименты**
   - ClearML
