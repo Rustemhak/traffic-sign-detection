@@ -54,7 +54,7 @@
 | model   | precision | recall | mAP50|speed(ms)
 |---------|-----------|--------|------|-----|
  | YOLOv8  | 0.98      | 0.96   |0.975| 5|
- | RT-DETR |0.96|0.99|0.986|17.5|
+ | RT-DETR |0.97|0.97|0.985|17.5|
 
 #### График метрик YOLOv8
 ![График метрик YOLOv8](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/metrics_YOLOv8.png)
@@ -68,7 +68,7 @@
 model | precision | recall | mAP50 |speed(ms)
 ----|-------|---|-------|----
 SGD |0.963|0.981| 0.989 |17.5
-AdamW|0.962|0.987|0.986|17.5
+AdamW|0.971|0.968|0.985|17.5
 
 </details>
 
