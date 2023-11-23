@@ -51,10 +51,11 @@
 
 Сравнение метрик YOLOv8 и RT-DETR (с лучшими гиперпараметрами)
 
-model | precision | recall | mAP50|speed(ms)
-----|-----------|--------|------|-----
-YOLOv8 | 0.98      | 0.96   |0.975| 5|
-RT-DETR|0.94|0.96|0.975|16.8
+| model   | precision | recall | mAP50|speed(ms)
+|---------|-----------|--------|------|-----|
+ | YOLOv8  | 0.98      | 0.96   |0.975| 5|
+ | RT-DETR |0.94|0.96|0.975|16.8|
+
 ![График метрик YOLOv8](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/metrics_YOLOv8.png)
 
 ![График метрик RT-DETR](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/metrics_RT-DETR.png)
