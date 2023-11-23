@@ -61,7 +61,7 @@
 #### График метрик RT-DETR
 ![График метрик RT-DETR](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/metrics_RT-DETR.png)
 
-Взяли YOLOv8 (выигрывает по всем метриками), но все равно пытались что-то выжать из RT-DETR...
+Взяли YOLOv8, так как имеет схожие метрики precision, recall и mAP с RT-DETR, но сильно выигрывает по скорости работы
 <details>
  <summary>Подробное сравнение RT-DETR с разными оптимизаторами </summary>
 
