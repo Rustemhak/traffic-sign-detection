@@ -1,39 +1,51 @@
+import random
 import streamlit as st
-import torch
 from pytube import YouTube
 import cv2
 import tempfile
 import os
 from ultralytics import YOLO
+import requests
+
+
+def download_file(url, destination):
+    # Проверка, существует ли файл
+    if not os.path.exists(destination):
+        response = requests.get(url)
+        with open(destination, 'wb') as file:
+            file.write(response.content)
+
+
+url = "https://drive.google.com/uc?export=download&id=1Xkkx1h3Tgjm3Y2xTpmoeMONue7ZGy7rT"
+destination = "best_yolo.pt"
+
+download_file(url, destination)
 
 # Загрузка модели Ultralytics
 model = YOLO('best_yolo.pt')  # убедитесь, что файл best_yolo.pt находится в правильной директории
 
-def draw_boxes(frame, detections):
-    for det in detections:
-        if len(det) >= 6:
-            x1, y1, x2, y2, conf, cls = det
-            if conf > 0.25:  # Установите порог уверенности
 
-                # Корректировка координат рамки
-                x1, y1, x2, y2 = max(0, int(x1)), max(0, int(y1)), min(int(x2), frame.shape[1]), min(int(y2), frame.shape[0])
+def draw_bounding_boxes(frame, results):
+    boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
+    classes = results[0].boxes.cls.cpu().numpy().astype(int)
+    scores = results[0].boxes.conf.cpu().numpy()
+    for box, clss, score in zip(boxes, classes, scores):
+        # Generate a random color for each object based on its ID
+        if score > 0.5:
+            random.seed(int(clss) + 8)
+            color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
-                # Получение названия класса
-                label = f'{model.names[int(cls)]} {conf:.2f}'
-
-                # Установка толщины рамки и размера шрифта
-                box_thickness = 3
-                font_scale = 0.7
-                font_thickness = 2
-
-                # Рисование ограничивающей рамки
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), box_thickness)
-
-                # Рисование подписи
-                cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), font_thickness)
-
+            cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3],), color, 4)
+            cv2.putText(
+                frame,
+                f"{model.model.names[clss]}",
+                (box[0], box[1]),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                (50, 255, 50),
+                3,
+            )
     return frame
-
 
 
 def process_video(video_path, model):
@@ -44,21 +56,19 @@ def process_video(video_path, model):
         ret, frame = cap.read()
         if not ret:
             break
-
         # Обработка кадра с помощью модели
         results = model(frame)
-        detections = results if isinstance(results, list) else results.xyxy[0]
 
-        # Рендеринг ограничивающих рамок и классов на кадре
-        frame = draw_boxes(frame, detections)
+        if results[0].boxes != None:
+            # Рендеринг ограничивающих рамок и классов на кадре
+            draw_bounding_boxes(frame, results)
 
         # Отображение обработанного кадра
         stframe.image(frame, channels="BGR", use_column_width=True)
-
     cap.release()
 
-# ... (остальная часть кода)
 
+# ... (остальная часть кода)
 
 
 # Функция для скачивания видео с YouTube
@@ -68,6 +78,7 @@ def download_youtube_video(url):
     temp_dir = tempfile.mkdtemp()
     video_path = stream.download(output_path=temp_dir)
     return video_path
+
 
 # ... (остальная часть кода)
 
