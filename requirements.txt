@@ -1,6 +1,7 @@
 fastapi==0.78.0
 uvicorn[standard]==0.18.2
 numpy==1.22.2
+opencv-python==4.5.5.64
 opencv-python-headless==4.5.5.64
 pandas==1.4.0
 pytube==15.0.0

@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Клонирование репозитория (если требуется)
-# RUN git clone https://github.com/your-github-repo.git .
+RUN git clone https://github.com/Rustemhak/dl-pract-ai-talent-hub.git .
 
 # Копирование файла зависимостей в контейнер
 COPY requirements.txt .
