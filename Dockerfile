@@ -1,20 +1,21 @@
-FROM python:3.9.9
+# Использование базового образа с поддержкой PyTorch
 FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime
-ARG DEBIAN_FRONTEND=noninteractive
 
-ARG APP_DIR=/app
-WORKDIR "$APP_DIR"
+# Установка рабочей директории
+WORKDIR /app
 
-COPY requirements.txt $APP_DIR/
+# Создание и активация виртуальной среды
+RUN python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 
-RUN apt-get update -y && \
-	apt-get install -y libsm6 libxrender1 libfontconfig1 && \
-    apt-get install -y libxext6 libgl1-mesa-glx ffmpeg
+# Копирование файла зависимостей в контейнер
+COPY requirements.txt .
 
-RUN pip install -U pip && \
-    pip install -U setuptools && \
-    pip install -r requirements.txt
+# Установка зависимостей
+RUN pip install --no-cache-dir -r requirements.txt
 
-# COPY . $APP_DIR/
-# ENTRYPOINT ["python", "app.py"]
-ENTRYPOINT ["bash"]
+# Копирование остальных файлов проекта
+COPY . .
+
+# Определение команды для запуска приложения
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
