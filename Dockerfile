@@ -8,7 +8,7 @@ WORKDIR /app
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# Установка необходимых системных библиотек
+# Установка необходимых системных библиотек, включая libGL
 RUN apt-get update && \
     apt-get install -y libgl1-mesa-glx
 
@@ -22,4 +22,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Определение команды для запуска приложения
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501"]
