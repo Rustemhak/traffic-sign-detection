@@ -8,6 +8,10 @@ WORKDIR /app
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
+# Установка необходимых системных библиотек
+RUN apt-get update && \
+    apt-get install -y libgl1-mesa-glx
+
 # Копирование файла зависимостей в контейнер
 COPY requirements.txt .
 
