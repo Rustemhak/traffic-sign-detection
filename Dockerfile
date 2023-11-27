@@ -1,2 +1,2 @@
-COPY requirements.txt requirements.txt
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+RUN pip uninstall opencv-python -y
+RUN pip install opencv-python-headless
