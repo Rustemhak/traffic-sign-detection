@@ -13,14 +13,12 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Клонирование репозитория (если требуется)
-RUN git clone https://github.com/Rustemhak/dl-pract-ai-talent-hub.git .
-
-# Копирование файла зависимостей в контейнер
-COPY requirements.txt .
+# Копирование файлов проекта в контейнер
+COPY . .
 
 # Установка зависимостей Python
-RUN pip3 install -r requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install -r requirements.txt
 
 # Открытие порта 8501 (стандартный порт для Streamlit)
 EXPOSE 8501
