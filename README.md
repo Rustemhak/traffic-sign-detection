@@ -60,6 +60,8 @@
 ![График метрик YOLOv8](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/metrics_YOLOv8.png)
 #### График метрик RT-DETR
 ![График метрик RT-DETR](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/metrics_RT-DETR.png)
+#### Сравнение метрик в ClearML
+![Сравнение метрик в ClearML](https://github.com/Rustemhak/dl-pract-ai-talent-hub/blob/main//metrics/ClearML_comparsion.png)
 
 Взяли YOLOv8, так как имеет схожие метрики precision, recall и mAP с RT-DETR, но сильно выигрывает по скорости работы
 <details>
