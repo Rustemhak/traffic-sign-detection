@@ -1,6 +1,6 @@
 # dl-pract-ai-talent-hub
 
-## [Демо-сервис](https://dl-pract-ai-talent-app-hdw3tv4udwhtcokfp76keb.streamlit.app/)
+## [Демо-сервис](https://dl-pract-ai-talent-app-nwkytcv9bmd4awifwvtcre.streamlit.app/)
 
 ## План:
 - формализовать задачу
