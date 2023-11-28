@@ -1,6 +1,6 @@
 # dl-pract-ai-talent-hub
 
-## Демо-приложение доступно по [cсылке](http://51.250.120.151:8501/), развернуто Yandex Cloud
+## Демо-приложение доступно по [cсылке](http://51.250.120.151:8501/), развернуто на Yandex Cloud
 ## Как запустить локально
 - `docker build -t streamlit .`
 - `docker run -p 8501:8501 streamlit`
